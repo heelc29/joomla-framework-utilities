@@ -45,7 +45,7 @@ class RegExTest extends TestCase
         self::assertEquals(
             [
                 'name'  => 'foobar',
-                'digit' => '2008'
+                'digit' => '2008',
             ],
             $matches
         );
