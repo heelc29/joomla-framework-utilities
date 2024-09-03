@@ -43,10 +43,10 @@ class RegExTest extends TestCase
         $matches = RegEx::match('~' . $name . ': ' . $digit . '~', $str);
 
         self::assertEquals(
-            array(
+            [
                 'name'  => 'foobar',
                 'digit' => '2008'
-            ),
+            ],
             $matches
         );
     }
@@ -56,7 +56,7 @@ class RegExTest extends TestCase
         $regex = 'a' . RegEx::optional('b') . 'c';
 
         self::assertEquals(
-            array('result' => 'ac'),
+            ['result' => 'ac'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaacccc'
@@ -64,7 +64,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'abc'),
+            ['result' => 'abc'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabcccc'
@@ -72,7 +72,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array(),
+            [],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabbcccc'
@@ -85,7 +85,7 @@ class RegExTest extends TestCase
         $regex = 'a' . RegEx::oneOrMore('b') . 'c';
 
         self::assertEquals(
-            array(),
+            [],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaacccc'
@@ -93,7 +93,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'abc'),
+            ['result' => 'abc'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabcccc'
@@ -101,7 +101,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'abbc'),
+            ['result' => 'abbc'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabbcccc'
@@ -114,7 +114,7 @@ class RegExTest extends TestCase
         $regex = 'a' . RegEx::noneOrMore('b') . 'c';
 
         self::assertEquals(
-            array('result' => 'ac'),
+            ['result' => 'ac'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaacccc'
@@ -122,7 +122,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'abc'),
+            ['result' => 'abc'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabcccc'
@@ -130,7 +130,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'abbc'),
+            ['result' => 'abbc'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaabbcccc'
@@ -143,7 +143,7 @@ class RegExTest extends TestCase
         $regex = 'a' . RegEx::anyOf('1', '2', '3') . 'c';
 
         self::assertEquals(
-            array(),
+            [],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaacccc'
@@ -151,7 +151,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'a1c'),
+            ['result' => 'a1c'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaa1cccc'
@@ -159,7 +159,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'a2c'),
+            ['result' => 'a2c'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaa2cccc'
@@ -169,10 +169,10 @@ class RegExTest extends TestCase
 
     public function testAnyOfArray()
     {
-        $regex = 'a' . RegEx::anyOf(array('1', '2', '3')) . 'c';
+        $regex = 'a' . RegEx::anyOf(['1', '2', '3']) . 'c';
 
         self::assertEquals(
-            array(),
+            [],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaacccc'
@@ -180,7 +180,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'a1c'),
+            ['result' => 'a1c'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaa1cccc'
@@ -188,7 +188,7 @@ class RegExTest extends TestCase
         );
 
         self::assertEquals(
-            array('result' => 'a2c'),
+            ['result' => 'a2c'],
             RegEx::match(
                 '~' . RegEx::capture($regex, 'result') . '~',
                 'aaaa2cccc'
